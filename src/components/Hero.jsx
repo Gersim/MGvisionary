@@ -30,7 +30,7 @@ const Hero = () => {
                         </span> Ideas Into Reality
                     </h1>
                     <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-lg">
-                        I design and develop high-performance web applications using modern technologies, focused on scalability, clean architecture, and business impact.
+                        Based in Albania, serving Europe & Worldwide. I design and develop high-performance web applications using modern technologies, focused on scalability and business impact.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
                         <Link to="projects" smooth={true} duration={500} className="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer">

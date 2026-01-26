@@ -44,7 +44,7 @@ const About = () => {
                             At <span className="font-semibold text-primary">MGVisionary</span>, I believe that great software is built at the intersection of vision, strategy, and clean code. It's not just about writing lines of code; it's about solving real business problems with elegant digital solutions.
                         </p>
                         <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                            With a strong background in web development and system design, I help businesses and individuals turn complex ideas into intuitive and scalable digital products. My approach transforms technical complexity into user-friendly experiences.
+                            With a strong background in web development and system design, I provide top-tier services from Albania to clients across Europe and the globe. My approach transforms technical complexity into user-friendly experiences.
                         </p>
 
                         <div className="space-y-4">

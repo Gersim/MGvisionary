@@ -1,65 +1,16 @@
-import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Send, ArrowLeft, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import emailjs from '@emailjs/browser';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import SEO from '../components/SEO';
 
 const ContactPage = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [status, setStatus] = useState(null); // 'success', 'error', null
-    const formRef = useRef();
-    const { executeRecaptcha } = useGoogleReCaptcha();
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setStatus(null);
-
-        // Validation for placeholder keys
-        if (import.meta.env.VITE_RECAPTCHA_SITE_KEY?.includes('YOUR_') ||
-            import.meta.env.VITE_EMAILJS_PUBLIC_KEY?.includes('YOUR_')) {
-            alert('CONFIGURATION REQUIRED: Please update the .env file with your actual Google ReCAPTCHA and EmailJS API keys to send messages.');
-            setIsLoading(false);
-            return;
-        }
-
-        try {
-            if (!executeRecaptcha) {
-                console.warn('Execute recaptcha not yet available');
-                return;
-            }
-
-            // 1. Execute ReCAPTCHA to get token
-            const token = await executeRecaptcha('contact_form_submit');
-
-            // 2. Prepare EmailJS parameters
-            // Note: You must update your EmailJS templates to accept 'g-recaptcha-response' if you want to verify it on server side,
-            // or rely on EmailJS's native CAPTCHA integration settings in their dashboard.
-            const currentForm = formRef.current;
-
-            // Sending email using EmailJS
-            await emailjs.sendForm(
-                import.meta.env.VITE_EMAILJS_SERVICE_ID,
-                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-                currentForm,
-                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-            );
-
-            setStatus('success');
-            currentForm.reset();
-        } catch (error) {
-            console.error('EmailJS Error:', error);
-            setStatus('error');
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    // ... code truncated ...
 
     return (
         <div className="bg-slate-950 min-h-screen flex flex-col">
+            <SEO
+                title="Contact Us"
+                description="Get in touch with MGVisionary for your next big project. Building scalable web, mobile, and software solutions in Albania and Europe."
+                keywords="Contact MGVisionary, Hire Developer, Web Development Agency Albania, Software Consultancy Italy, React Developer Germany, Python Expert France"
+                url="/contact"
+            />
             <Navbar />
 
             <main className="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">

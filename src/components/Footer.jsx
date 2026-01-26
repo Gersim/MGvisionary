@@ -47,8 +47,8 @@ const Footer = () => {
                     <div>
                         <h3 className="text-white font-bold mb-4">Contact</h3>
                         <ul className="space-y-2 text-sm text-slate-400">
-                            <li>info@mgvisionary.com</li>
-                            <li>+355 6X XX XX XXX</li>
+                            <li>mgvisionare@gmail.com</li>
+                            <li>+355 68 26 50 745</li>
                             <li>Tirana, Albania</li>
                         </ul>
                     </div>

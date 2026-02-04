@@ -8,9 +8,9 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-4 gap-8 mb-8">
                     <div className="col-span-1 md:col-span-2">
-                        <span className="text-2xl font-heading font-bold text-white tracking-tight mb-4 block">
-                            MG<span className="text-accent">Visionary</span>
-                        </span>
+                        <Link to="hero" smooth={true} duration={500} className="inline-block mb-4 cursor-pointer overflow-hidden">
+                            <img src="/logo1.svg" alt="MGVisionary Logo" className="h-20 w-auto scale-[1.2] origin-left" />
+                        </Link>
                         <p className="text-slate-400 max-w-sm mb-6">
                             Helping businesses and individuals build structured, scalable, and high-performance web applications.
                         </p>

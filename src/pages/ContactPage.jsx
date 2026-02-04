@@ -1,7 +1,49 @@
+import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowLeft, CheckCircle, AlertCircle, Loader2, Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import ReCAPTCHA from 'react-google-recaptcha';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
 const ContactPage = () => {
-    // ... code truncated ...
+    const formRef = useRef();
+    const [status, setStatus] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [captchaToken, setCaptchaToken] = useState(null);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!captchaToken) {
+            alert("Please verify you are not a robot.");
+            return;
+        }
+
+        setIsLoading(true);
+        setStatus(null);
+
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+        emailjs.sendForm(serviceId, templateId, formRef.current, {
+            publicKey: publicKey,
+        })
+            .then(() => {
+                setStatus('success');
+                if (formRef.current) formRef.current.reset();
+                setCaptchaToken(null);
+            }, (error) => {
+                console.error('EmailJS Error:', error);
+                setStatus('error');
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    };
 
     return (
         <div className="bg-slate-950 min-h-screen flex flex-col">
@@ -98,6 +140,16 @@ const ContactPage = () => {
                                     ></textarea>
                                 </div>
 
+                                {/* ReCAPTCHA Container */}
+                                <div className="flex justify-center md:justify-start">
+                                    <ReCAPTCHA
+                                        sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                                        onChange={setCaptchaToken}
+                                        theme="dark"
+                                    />
+                                </div>
+                                <input type="hidden" name="g-recaptcha-response" value={captchaToken || ''} />
+
                                 {status === 'error' && (
                                     <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex items-center gap-3 text-red-400">
                                         <AlertCircle size={20} />
@@ -109,7 +161,7 @@ const ContactPage = () => {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     type="submit"
-                                    disabled={isLoading}
+                                    disabled={isLoading || !captchaToken}
                                     className="w-full py-4 bg-accent text-white font-bold rounded-xl text-lg hover:bg-sky-400 transition-colors shadow-lg hover:shadow-cyan-500/50 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {isLoading ? (
